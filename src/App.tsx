@@ -22,7 +22,7 @@ import stopSnd from './sound/stop.wav';
 import aSnd from './sound/letters/a.wav';
 // @ts-ignore
 import xSnd from './sound/letters/x.wav';
-import SoundPlayer from "components/sound-player/sound-player";
+import SoundPlayer from "./components/sound-player/sound-player";
 
 
 const App: React.FunctionComponent = (): React.ReactElement => {

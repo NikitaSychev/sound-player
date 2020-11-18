@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ISoundPlayerProps} from 'components/sound-player/types';
+import {ISoundPlayerProps} from "./types";
 
 const SoundPlayer: React.FunctionComponent<ISoundPlayerProps> = (props: ISoundPlayerProps): React.ReactElement => {
     const [sounds, setSounds] = useState<HTMLAudioElement[]>([]);
