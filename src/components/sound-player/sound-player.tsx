@@ -1,108 +1,82 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {ISoundPlayerProps} from './types';
-// @ts-ignore
-import errSnd from './sound/err.wav';
-import IframeAudio from "../iframe-audio/iframe-audio";
 
 const SoundPlayer: React.FunctionComponent<ISoundPlayerProps> = (props: ISoundPlayerProps): React.ReactElement => {
-    const [sounds, setSound] = useState<HTMLAudioElement[]>([]);
+    const [sounds, setSounds] = useState<HTMLAudioElement[]>([]);
     const [isFinished, setIsFinished] = useState<boolean>(false);
+    const [sources, setSources] = useState<string[]>([]);
+    const [soundIndex, setSoundIndex] = useState<number>(0);
 
     const clearSounds = (): void => {
         if (sounds.length) {
-            setSound([]);
+            setSounds([]);
         }
     }
     const playSound = (index: number, onFinished: () => void) => {
-        if (index >= sounds.length || isFinished) {
+        if (isFinished || !Array.isArray(sounds) || index >= sounds.length) {
             onFinished();
+            setIsFinished(true);
             clearSounds();
+            setSoundIndex(index);
             return;
         }
-
-        const next = () => playSound(index + 1, onFinished);
-
-        if (props.sounds.length <= index) {
-            if (props.sounds[index + 1]) {
-                playSound(index + 1, onFinished);
-            } else {
-                onFinished();
-            }
-        } else {
-            sounds[index].onended = next;
-            sounds[index].play();
+        const sound = sounds[index];
+        if (sound) {
+            sound.play()
+                .then(() => {
+                    setTimeout(() => {
+                        playSoundMemo(index + 1, onFinished);
+                    }, 300);
+                })
+                .catch((err: DOMException) => {
+                    console.error('error', err.message);
+                    playSoundMemo(index + 1, onFinished);
+                });
         }
     }
 
-    const startPlaySound = (): void => {
+    const prepareSounds = (): void => {
         if (isFinished) {
             return;
         }
         if (!props.isExternalSound) {
             const curSounds: HTMLAudioElement[] = [];
-            props.sounds.forEach(name => {
-                const audio = new Audio(
-                    errSnd
-                    // `../../sound/${name}.wav`
-                );
+            sources.forEach(source => {
+                const audio = new Audio(source);
+                audio.id = source;
+                // audio.autoplay = true;
 
-                audio.addEventListener('error', function () {
-                    console.log('error', `sound play error`);
-                });
-                audio.id = errSnd.toString();
-                audio.autoplay = true;
-
-                // audio.play()
-                //     .then((res) => {
-                //         console.log('is play');
-                //     })
-                //     .catch((err: DOMException) => {
-                //         console.error('error', err.message);
-                //     });
-
-                // const stl: ElementCSSInlineStyle = {style: {display: 'none'}} as ElementCSSInlineStyle
-                //
-                // const iframe = {} as HTMLIFrameElement;
-                // iframe.src = `${name}.wav`;
-                // iframe.allow = 'autoplay';
-                // // iframe.style = stl
-                // iframe.id = 'iframeAudio';
-                //
-                // iframe.click();
                 if (!sounds.find(item => item.id === audio.id)) {
                     curSounds.push(audio);
                 }
             });
             if (curSounds.length) {
-                setSound(curSounds);
+                setSounds(curSounds);
             }
         }
     }
 
-    const playSoundMemo = useCallback(playSound, [sounds]);
+    const playSoundMemo = useCallback(playSound, [clearSounds, isFinished, playSound, sounds]);
 
     useEffect(() => {
-        playSoundMemo(0, props.onFinished ? props.onFinished : () => {
-        });
+        playSoundMemo(soundIndex, props.onFinished ? props.onFinished : () => {});
         return () => {
             setIsFinished(true);
         }
-    }, [sounds, playSoundMemo, props.onFinished])
+    }, [playSoundMemo, props.onFinished, soundIndex]);
 
-    startPlaySound();
+    useEffect(() => {
+        setSources(props.sounds);
+        setIsFinished(false);
+    }, [props.sounds]);
 
-    // return (
-    //     <IframeAudio sound={errSnd}/>
-    // );
+    if (!isFinished && Array.isArray(sounds) && sounds.length === 0) {
+        prepareSounds();
+    }
+
     return (
         <></>
     );
 }
 
 export default SoundPlayer;
-// <button onClick={startPlaySound}>{'Старт'}</button>
-// return (
-//     <React.Fragment>
-//         <div>{'Ghbdtn!'}</div>
-//     </React.Fragment>
-// );
