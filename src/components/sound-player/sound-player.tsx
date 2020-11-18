@@ -1,5 +1,12 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ISoundPlayerProps} from "./types";
+
+interface ISoundPlayerProps {
+    isExternalSound: boolean
+    sounds: string[]
+    getSoundAction?: () => void
+    onPlay?: () => void
+    onFinished?: () => void
+}
 
 const SoundPlayer: React.FunctionComponent<ISoundPlayerProps> = (props: ISoundPlayerProps): React.ReactElement => {
     const [sounds, setSounds] = useState<HTMLAudioElement[]>([]);
