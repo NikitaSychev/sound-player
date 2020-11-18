@@ -1,6 +1,6 @@
 {
   "name": "sound-player-emex",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "description": "sound player",
   "author": "https://github.com/NikitaSychev",
@@ -21,13 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "npm run prebuild & npm run build & copy package.json lib & npm publish lib",
-    "prebuild": "rimraf lib/*",
-    "build": "tsc -p .",
-    "build33": "react-scripts build",
-    "prepare": "npm run prebuild & npm run build"
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
