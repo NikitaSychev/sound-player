@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import './App.css';
-import SoundPlayer from "./node_modules/components/sound-player/sound-player";
 // @ts-ignore
 import attSnd from './sound/attention.wav';
 // @ts-ignore
@@ -23,6 +22,7 @@ import stopSnd from './sound/stop.wav';
 import aSnd from './sound/letters/a.wav';
 // @ts-ignore
 import xSnd from './sound/letters/x.wav';
+import SoundPlayer from "components/sound-player/sound-player";
 
 
 const App: React.FunctionComponent = (): React.ReactElement => {
