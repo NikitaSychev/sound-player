@@ -1,7 +1,14 @@
 {
   "name": "sound-player-emex",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.2",
+  "private": false,
+  "description": "sound player",
+  "author": "https://github.com/NikitaSychev",
+  "main": "src/index.tsx",
+  "repository": {
+    "type": "git",
+    "directory": "git+https://github.com/NikitaSychev/sound-player.git"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

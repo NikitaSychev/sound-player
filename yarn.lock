@@ -9910,6 +9910,24 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+sound-player-emex@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/sound-player-emex/-/sound-player-emex-0.0.1.tgz#77b80793462ed8c8509c357ec9aa0223ac8f3313"
+  integrity sha512-gDpcZq4n4P7SFRe5FQoJWS8kTfHudwlUj3ZgiCLYvkYyLKjtzKx25UQKR2nbdfVuaSOXr2HAPMDhuKaqFH8LSg==
+  dependencies:
+    "@testing-library/jest-dom" "^5.11.4"
+    "@testing-library/react" "^11.1.0"
+    "@testing-library/user-event" "^12.1.10"
+    "@types/jest" "^26.0.15"
+    "@types/node" "^12.0.0"
+    "@types/react" "^16.9.53"
+    "@types/react-dom" "^16.9.8"
+    react "^17.0.1"
+    react-dom "^17.0.1"
+    react-scripts "4.0.0"
+    typescript "^4.0.3"
+    web-vitals "^0.2.4"
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
