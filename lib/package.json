@@ -25,9 +25,7 @@
     "eject": "react-scripts eject",
     "deploy": "npm run prebuild & npm run build & copy package.json lib & npm publish lib",
     "prebuild": "rimraf lib/*",
-    "build": "tsc -p .",
-    "build33": "react-scripts build",
-    "prepare": "npm run prebuild & npm run build"
+    "build": "tsc -p ."
   },
   "eslintConfig": {
     "extends": [
