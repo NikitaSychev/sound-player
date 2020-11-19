@@ -1,8 +1,5 @@
 import React from "react";
-
-export interface IIframeAudioProps {
-    sound: string
-}
+import {IIframeAudioProps} from "./types";
 
 const IframeAudio: React.FunctionComponent<IIframeAudioProps> = (props: IIframeAudioProps): React.ReactElement => {
 
